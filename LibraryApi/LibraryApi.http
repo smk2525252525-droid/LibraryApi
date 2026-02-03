@@ -1,0 +1,2 @@
+GET http://localhost:5194/api/users
+Accept: application/json

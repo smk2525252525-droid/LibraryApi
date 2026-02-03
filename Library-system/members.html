@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Members List</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body class="bg-light">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-brown">
+            <div class="container">
+                  <a class="navbar-brand" href="dashboard.html">Library Dashboard</a>
+                <div>
+                    <span id="userEmail" class="text-light fw-bold"></span>
+
+                    <a href="dashboard.html" class="btn btn-outline-light">Dashboard</a>
+                     <a href="login.html" class="btn btn-dark">Logout</a>
+                </div>
+            </div>
+        </nav>
+
+<div class="container mt-5">
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h2>Members List</h2>
+            <p class="lead">List of registered members and their roles</p>
+        </div>
+        <a href="add-member.html" class="btn btn-success">+ Add Member</a>
+    </div>
+
+<div class="table-responsive glass-table">
+    <table class="table table-striped table-hover">
+        <thead class="table-dark"><!--<thead> is table header section in HTML-->
+            <tr><!--table row-->
+                <th>#</th><!--used to number members serially-->
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="members-table-body">
+            <!-- Member rows will be added here through java script app.js -->
+        </tbody>
+    </table>
+</div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script><!--Jquery library-->
+<script src="js/app.js"></script><!--custom javascript file app.js-->
+<!--
+
+    //demo members:
+const members = [
+            {id:1, name:"John Doe", email:"john@example.com", role:"Member"},
+            {id:2, name:"Jane Smith", email:"jane@example.com", role:"Admin"},
+            {id:3, name:"Mike Brown", email:"mike@example.com", role:"Member"}
+];
+
+members.forEach(member=> {
+    $("#members-table-body").append(`
+    <tr>
+        <td>${member.id}</td>
+        <td>${member.name}</td>
+        <td>${member.email}</td>
+        <td>${member.role}</td>
+        <td>
+            <button class="btn btn-sm btn-primary me-2">Edit</button>
+            <button class="btn btn-sm btn-danger">Delete</button>
+        </td>
+        </tr>
+    `);
+});
+
+
+-->
+
+
+    </body>
+</html>

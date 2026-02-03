@@ -1,0 +1,63 @@
+<!DOCTYPE   html>
+<html lang="en">
+    <head>
+<meta charset="Utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add new member</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    </head>
+    <body class="bg-light">
+
+        <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-brown">
+    <div class="container">
+          <a class="navbar-brand" href="dashboard.html">Library Dashboard</a>
+        <div class="ms-auto d-flex align-items-center">
+            <span id="userEmail" class="text-light fw-bold me-3"></span>
+            <a href="dashboard.html" class="btn btn-outline-light me-2">Dashboard</a>
+            <button id="logoutBtn" class="btn btn-dark">Logout</button>
+        </div>
+    </div>
+</nav>
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card card-blur" style="width: 600px;">
+
+        <h3 class="text-center mb-3">Add New Member</h3>
+
+        <input type="text" id="Member-name" class="form-control mb-3" placeholder="Enter new Member Name">
+        <input type="email" id="Member-email" class="form-control mb-3" placeholder="Enter new Member Email">
+
+       <select id="member-role" class="form-select mb-3">
+    <option value="">Select Role</option>
+    <option value="Member">Member</option>
+    <option value="Admin">Admin</option>
+        </select>
+
+        <button id="addmemberBtn" class="btn btn-outline-light w-50 center-block mx-auto">
+            Add Member
+        </button>
+
+       <a href="members.html" class="btn btn-danger w-50 center-block mx-auto mt-3 d-block text-center">
+            Back to Members List
+        </a>
+    </div>
+</div>
+<footer class="footer">
+  <div class="container text-center">
+    <p class="footer-text">
+      © 2026 Library Management System. All rights reserved.
+    </p>
+    <p class="footer-subtext">
+      Designed by kumail hasan rizvi
+    </p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/app.js"></script>
+
+    </body>
+</html>

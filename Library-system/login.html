@@ -1,0 +1,54 @@
+<!DOCTYPE html> <!-- document type html5 -->
+
+<html lang="en"><!-- improves accesiblity ad seo -->
+
+<head>
+    <meta charset="UTF-8"><!-- character encoding meaning letters,symbols,emojs to be used -->
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!-- for responsiveness on mobile -->
+
+    <title>Library Login</title><!-- text on browser tab -->
+
+     <!--loads Bootstrap CSS and it libraris + classes i.e buttons,cards-->
+    <link 
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+      rel="stylesheet">
+
+      <link rel="stylesheet" href="css/style.css"><!-- loads my custom css -->
+
+
+</head>
+ <body class="bg-light"><!-- visible content on page starts here, add grey background light -->
+
+  <div class="container d-flex justify-content-center align-items-center vh-100"><!-- container adds horizontal padding and max width, centres horizontly and vertically, vh-100 for 100% of vieport -->
+
+  <div class="card card-transparent p-4 " style="width: 350px; "><!-- padding and shadow added and width for card 350pixels -->
+
+    <h3 class="text-center mb-3">Library Login</h3><!-- displayed -->
+
+    <input type="email" id="email" class="form-control mb-3" placeholder="Email"><!-- allows input type allows email format, id is unique identifier for javascrypt/jquer, mb adds space below input -->
+
+    <input type="password" id="password" class="form-control mb-3" placeholder="password">
+
+   <!--<button class="btn btn-success w-100 mb-3" onclick="login()">Sign in</button>   btn boostrap buttonn btn-success colour, w-100 100% width, onclick inline javascript to trigger when button clicked, login() calls javascrypt function login in app.js -->
+
+    <button id="loginbtn" class="btn btn-success w-100 mb-3" >Sign in</button><!--assigned id=loginbtn to button for jquery to select and add event listener in app.js -->
+
+    <a href="register.html" class="btn btn-secondary w-100 ">Register Here</a><!-- register button -->
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script><!-- loads jquery library, jquery makes java script easier and simpler providing simple selectors like $(#id) -->
+
+    <script src="js/app.js"></script><!-- loads my custom javascript file app.js -->
+
+
+
+  </div>
+  
+
+</body>
+
+
+
+    
+</body>
+</html>
