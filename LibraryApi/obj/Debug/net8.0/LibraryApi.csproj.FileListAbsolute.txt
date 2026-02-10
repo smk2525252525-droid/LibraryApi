@@ -139,3 +139,4 @@ C:\Users\hassakum\Downloads\Assignment4\LibraryApi\obj\Debug\net8.0\LibraryApi.g
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi\obj\Debug\net8.0\ref\LibraryApi.dll
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\Users\hassakum\Downloads\Assignment4\LibraryApi\obj\Debug\net8.0\LibraryApi.sourcelink.json

@@ -1,6 +1,7 @@
-using System.Collections.Generic;
+
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+
 
 namespace LibraryApi.Models
 {
@@ -14,5 +15,7 @@ namespace LibraryApi.Models
 
         [JsonIgnore]
         public ICollection<Book> Books { get; set; } = new List<Book>();
+        
+        
     }
 }
