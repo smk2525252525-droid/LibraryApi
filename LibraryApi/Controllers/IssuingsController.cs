@@ -15,14 +15,13 @@ public class IssuingsController : ControllerBase
     public IssuingsController(LibraryDbContext context) { _context = context; }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Issuing>>> GetIssuings() => 
+    public async Task<ActionResult<IEnumerable<Issuing>>> GetAllIssuingsAsync() => 
         await _context.Issuings.Include(i => i.User).Include(i => i.Book).ToListAsync();
 
     [HttpPost]
-public async Task<ActionResult<Issuing>> PostIssuing(IssuingDto dto)
+public async Task<ActionResult<Issuing>> CreateIssuingAsync(IssuingDto dto)
 {
-    // The compiler will no longer complain about 'User' and 'Book' 
-    // because we removed the 'required' keyword in the model.
+    
     var issuing = new Issuing 
     { 
         UserId = dto.UserId, 
@@ -35,12 +34,12 @@ public async Task<ActionResult<Issuing>> PostIssuing(IssuingDto dto)
     return Ok(issuing);
 }
 
-    // Logic for returning a book
+    // Logic for returning a book, sets tiemstamp for when the book was returned in database
     [HttpPut("return/{id}")]
-    public async Task<IActionResult> ReturnBook(int id)
+    public async Task<IActionResult> ReturnBookAsync(int id)
     {
         var issuing = await _context.Issuings.FindAsync(id);
-        if (issuing == null) return NotFound();
+        if (issuing == null) return NotFound(new { message = "Issuing record not found." });
         
         issuing.ReturnedAt = DateTime.Now;
         await _context.SaveChangesAsync();

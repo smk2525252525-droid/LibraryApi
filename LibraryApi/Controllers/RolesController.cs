@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace LibraryApi.Controllers
-{[Route("api/[controller]")]
+{
+
+[Route("api/[controller]")]
 [ApiController]
 [Authorize(Roles = "Admin")] // Only Admins can manage roles
 public class RolesController : ControllerBase
@@ -15,15 +17,15 @@ public class RolesController : ControllerBase
     public RolesController(LibraryDbContext context) { _context = context; }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Role>>> GetRoles() => await _context.Roles.ToListAsync();
+    public async Task<ActionResult<IEnumerable<Role>>> GetRolesAsync() => await _context.Roles.ToListAsync();
 
     [HttpPost]
-    public async Task<ActionResult<Role>> PostRole(RoleDto dto)
+    public async Task<ActionResult<Role>>  CreateRoleAsync(RoleDto dto)
     {
         var role = new Role { Name = dto.Name };
         _context.Roles.Add(role);
         await _context.SaveChangesAsync();
-        return Ok(role);
+        return CreatedAtAction(nameof(GetRolesAsync), new { id = role.Id }, role);
     }
 
     // PUT: api/Roles/5

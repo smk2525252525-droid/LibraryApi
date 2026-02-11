@@ -14,22 +14,22 @@ public class CategoriesController : ControllerBase
     public CategoriesController(LibraryDbContext context) { _context = context; }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Category>>> GetCategories() => await _context.Categories.ToListAsync();
+    public async Task<ActionResult<IEnumerable<Category>>> GetCategoriesAsync() => await _context.Categories.ToListAsync();
 
     [HttpPost]
     [Authorize(Roles = "Admin")]
-    public async Task<ActionResult<Category>> PostCategory(CategoryDto dto)
+    public async Task<ActionResult<Category>> CreateCategoryAsync(CategoryDto dto)
     {
         var category = new Category { Name = dto.Name };
         _context.Categories.Add(category);
         await _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetCategories), new { id = category.Id }, category);
+        return CreatedAtAction(nameof(GetCategoriesAsync), new { id = category.Id }, category);
     }
 
     // DELETE: api/Categories/5
     [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
-public async Task<IActionResult> DeleteCategory(int id)
+public async Task<IActionResult> DeleteCategoryAsync(int id)
 {
     var category = await _context.Categories.Include(c => c.Books).FirstOrDefaultAsync(c => c.Id == id);
     if (category == null) return NotFound();

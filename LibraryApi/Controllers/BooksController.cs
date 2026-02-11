@@ -13,34 +13,47 @@ namespace LibraryApi.Controllers
 public class BooksController : ControllerBase
 {
     private readonly LibraryDbContext _context;
-    public BooksController(LibraryDbContext context) { _context = context; }
+    public BooksController(LibraryDbContext context) { _context = context; }//constructor injection for db context, underscore prefix for private variable
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Book>>> GetBooks() => 
         await _context.Books.Include(b => b.Category).ToListAsync();
 
+           // GET: api/Books/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Book>> GetBookByIdAsync(int id)
+        {
+            var book = await _context.Books.Include(b => b.Category).FirstOrDefaultAsync(b => b.Id == id);
+            
+            if (book == null) return NotFound(new { message = "Book not found." });
+            return Ok(book);
+        }
+
+
+
     [HttpPost]
     [Authorize(Roles = "Admin")]
-public async Task<ActionResult<Book>> PostBook(BookCreateDto dto)
+public async Task<ActionResult<Book>> CreateBookAsync(BookCreateDto dto)
 {
     var book = new Book 
     { 
         Title = dto.Title, 
         Author = dto.Author,
         CategoryId = dto.CategoryId,
-        Status = dto.Status
+        Status = dto.Status ?? "Available" // Default to "Available" if not provided
     };
 
     _context.Books.Add(book);
     await _context.SaveChangesAsync();
-    return Ok(book);
+      // Using nameof() ensures that if the method name changes, the compiler catches it
+    return CreatedAtAction(nameof(GetBookByIdAsync), new { id = book.Id }, book);
 }
 
-    // PUT: api/Books/5
+ // PUT: api/Books/5
 // Used for updating the ENTIRE book object
 [Authorize(Roles = "Admin")]
 [HttpPut("{id}")]
-public async Task<IActionResult> PutBook(int id, BookCreateDto dto)
+public async Task<IActionResult> UpdateBookAsync(int id, BookCreateDto dto)
 {
     var book = await _context.Books.FindAsync(id);
     if (book == null) return NotFound();
@@ -63,7 +76,7 @@ public async Task<IActionResult> PutBook(int id, BookCreateDto dto)
 // PATCH: api/Books/status/5
 // Used for partial updates (just changing the status)
 [HttpPatch("status/{id}")]
-public async Task<IActionResult> UpdateStatus(int id, [FromBody] string newStatus)
+public async Task<IActionResult> UpdateBookStatusAsync(int id, [FromBody] string newStatus)
 {
     var book = await _context.Books.FindAsync(id);
     if (book == null) return NotFound();
@@ -76,7 +89,7 @@ public async Task<IActionResult> UpdateStatus(int id, [FromBody] string newStatu
 
     [HttpDelete("{id}")]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> DeleteBook(int id)
+    public async Task<IActionResult> DeleteBookAsync(int id)
     {
         var book = await _context.Books.FindAsync(id);
         if (book == null) return NotFound();
