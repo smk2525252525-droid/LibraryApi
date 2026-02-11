@@ -24,19 +24,23 @@ namespace LibraryApi.Controllers
         }
 
        [HttpPost("login")]
-public IActionResult Login([FromBody] LoginDto loginDto)
+public async Task<IActionResult> LoginAsync([FromBody] LoginDto loginDto)
 {
-    // LOG 1: Check what arrived
-    Console.WriteLine($"---> Login Request Received for: {loginDto.Email}");
+    // Standard: Basic validation check
+            if (loginDto == null || string.IsNullOrEmpty(loginDto.Email) || string.IsNullOrEmpty(loginDto.Password))
+            {
+                return BadRequest(new { message = "Email and Password are required." });
+            }
 
-    var user = _context.Users.Include(u => u.Role)
-                             .FirstOrDefault(u => u.Email == loginDto.Email);
+            // Standard: Eager load the Role to include it in the JWT claims
+            var user = await _context.Users.Include(u => u.Role)
+                                           .FirstOrDefaultAsync(u => u.Email == loginDto.Email);
 
-    if (user == null)
-    {
-        Console.WriteLine("---> ERROR: User not found in database.");
-        return Unauthorized(new { message = "Invalid credentials" });
-    }
+            if (user == null)
+            {
+                return Unauthorized(new { message = "Invalid email or password." });
+            }
+
 // Use BCrypt to verify the plain-text input against the stored hash
     bool isPasswordValid = BCrypt.Net.BCrypt.Verify(loginDto.Password, user.PasswordHash);
 
@@ -52,18 +56,20 @@ public IActionResult Login([FromBody] LoginDto loginDto)
     return Ok(new { 
     token = token, 
     role = user.Role?.Name, // This will be "Admin" or "Member"
-     userId = user.Id 
+     userId = user.Id,
+     email = user.Email 
     });
 
 }
 
+    // Helper method to create a JWT for the authenticated user.
         private string GenerateJwtToken(User user)
         {
             var jwtSecret = _configuration["Jwt:Secret"] ?? "SuperSecretKeyForJWT12345678901234567890!";
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var claims = new[]
+            var claims = new[]//  Standard: Define claims to be embedded in the token
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.Name),
@@ -75,7 +81,7 @@ public IActionResult Login([FromBody] LoginDto loginDto)
                 issuer: _configuration["Jwt:Issuer"] ?? "MyLibraryApi",
                 audience: _configuration["Jwt:Audience"] ?? "MyLibraryApi",
                 claims: claims,
-                expires: DateTime.UtcNow.AddHours(2),
+                expires: DateTime.UtcNow.AddHours(2),//token validity: 2 hours(common choice for session tokens)
                 signingCredentials: creds
             );
 
