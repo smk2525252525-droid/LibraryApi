@@ -10,24 +10,25 @@ namespace LibraryApi.Controllers
     [ApiController]
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
-    {
-        private readonly LibraryDbContext _context;
-        public UsersController(LibraryDbContext context)
+    {       
+        //private field with underscore
+        private readonly LibraryDbContext _context;//camelCase undersocre to signify private variable global to class
+        public UsersController(LibraryDbContext context)//variable naming in small case
         {
             _context = context;
         }
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public async Task<IActionResult> GetUsers()
-        {
-            var users = await _context.Users.Include(u => u.Role).ToListAsync();
+        public async Task<IActionResult> GetUsersAsync()
+        {   
+            var users = await _context.Users.Include(u => u.Role).ToListAsync();//resource rule: added async suffix to let developers know to addd/use await when calling this method
             return Ok(users);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUser(int id)
+        public async Task<IActionResult> GetUserByIdAsync(int id) //Descriptive name for clarity, indicates async operation
         {
             var user = await _context.Users.Include(u => u.Role)
                                            .FirstOrDefaultAsync(u => u.Id == id);
@@ -37,7 +38,7 @@ namespace LibraryApi.Controllers
 
         [AllowAnonymous] // Allow anyone to register
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(UserCreateDto userDto)
+        public async Task<ActionResult<User>> RegisterUserAsync(UserCreateDto userDto) //renamed method for clarity, varibale with camelCase
         {
             // Map DTO to Entity
             var user = new User
@@ -51,14 +52,14 @@ namespace LibraryApi.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            // Return the created user (The [JsonIgnore] will ensure PasswordHash is hidden in this response)
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            // Return the created user 
+            return CreatedAtAction(nameof(GetUserByIdAsync), new { id = user.Id }, user);//resource rule: used nameof to avoid hardcoding the method name, which helps prevent errors during refactoring and improves maintainability
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Users/id
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, UserCreateDto dto)
+        public async Task<IActionResult> UpdateUserAsync(int id, UserCreateDto dto)//updated method name for clarity, variable with camelCase
         {
             var user = await _context.Users.FindAsync(id);
             if (user == null) return NotFound();
@@ -80,25 +81,26 @@ namespace LibraryApi.Controllers
         // PATCH: api/Users/change-role/5
         [Authorize(Roles = "Admin")]
         [HttpPatch("change-role/{id}")]
-        public async Task<IActionResult> UpdateUserRole(int id, [FromBody] int newRoleId)
+        public async Task<IActionResult> UpdateUserRoleAsync(int id, [FromBody] int newRoleId)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users.FindAsync(id);//underscore prefix for private variable
             if (user == null) return NotFound();
 
             // Check if the new role exists
             var roleExists = await _context.Roles.AnyAsync(r => r.Id == newRoleId);
             if (!roleExists) return BadRequest("The specified Role ID does not exist.");
 
-            user.RoleId = newRoleId;
+            user.RoleId = newRoleId;//apply changes to the role
+
             await _context.SaveChangesAsync();
 
-            return Ok(new { message = "User role updated successfully", userId = user.Id, newRoleId = user.RoleId });
+            return Ok(new { message = "User role updated successfully", userId = user.Id, newRoleId = user.RoleId });//structured json response
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Users/id
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteUserAsync(int id)//changed method name for clarity, variable with camelCase
         {
             // Include Issuings to check for active loans
             var user = await _context.Users.Include(u => u.Issuings).FirstOrDefaultAsync(u => u.Id == id);
