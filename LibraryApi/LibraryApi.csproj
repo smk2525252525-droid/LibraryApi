@@ -1,4 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
+//autocreated by visual studio, list .net version and installed nuget packages here:(BCrypt, JwtBearer, EF Core)
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>

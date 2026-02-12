@@ -5,11 +5,15 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Text.Json.Serialization;
 
+
+//entry point of the application, Brain
+//configures services and middleware, and runs the application.(cors, swagger, authentication, database seeding),connects appsettings.json (data) to the Controllers (logic).
+//Program.cs starts, reads the DB string from appsettings.json, and checks libraryapi.csproj to make sure all tools are installed
 var builder = WebApplication.CreateBuilder(args);
 
 
 // Database
-
+// Configure the DbContext to use SQL Server with the connection string from appsettings.json
 builder.Services.AddDbContext<LibraryDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
@@ -20,7 +24,7 @@ builder.Services.AddDbContext<LibraryDbContext>(options =>
 var jwtSecret = builder.Configuration["Jwt:Secret"] ?? "SuperSecretKeyForJWT123!";
 var keyBytes = Encoding.UTF8.GetBytes(jwtSecret);
 
-builder.Services.AddAuthentication(options =>
+builder.Services.AddAuthentication(options =>//tells app how to reach jwt tokens
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -42,7 +46,7 @@ builder.Services.AddAuthentication(options =>
 
 // Controllers & JSON options
 
-builder.Services.AddControllers()
+builder.Services.AddControllers()//enables use of controller classes
     .AddJsonOptions(options =>
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles
     );
@@ -57,20 +61,20 @@ builder.Services.AddCors(options => {
 
 var app = builder.Build();
 
-// Middleware
+// Middleware: sequence of filters every request passes through
 //swagger
 app.UseSwagger();
 app.UseSwaggerUI();
 
 
-app.UseCors("AllowAll");
+app.UseCors("AllowAll");//cross application allows to talk to frontend
 
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllers();//sends request to the specific controller based on the route
 
 
 

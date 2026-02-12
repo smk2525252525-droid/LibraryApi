@@ -1,4 +1,4 @@
-namespace LibraryApi.Models.DTOs
+namespace LibraryApi.Models.DTOs//DTOs, To separate the Database Schema from the API Interface.,Used in Controller method parameters 
 {
     public class BookCreateDto
     {

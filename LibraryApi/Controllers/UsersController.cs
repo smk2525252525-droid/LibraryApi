@@ -81,7 +81,8 @@ namespace LibraryApi.Controllers
         // PATCH: api/Users/change-role/5
         [Authorize(Roles = "Admin")]
         [HttpPatch("change-role/{id}")]
-        public async Task<IActionResult> UpdateUserRoleAsync(int id, [FromBody] int newRoleId)
+        public async Task<IActionResult> UpdateUserRoleAsync(int id, [FromBody] int newRoleId)//deserializes the incoming JSON payload into a LoginDto object, 
+                                                //if we didnt use this([from body]): even if the frontend sent the data perfectly, the C# code wouldn't know where to look for it
         {
             var user = await _context.Users.FindAsync(id);//underscore prefix for private variable
             if (user == null) return NotFound();

@@ -17,7 +17,8 @@ public class BooksController : ControllerBase
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Book>>> GetBooks() => 
-        await _context.Books.Include(b => b.Category).ToListAsync();
+        await _context.Books.Include(b => b.Category).ToListAsync();//eager loading to include category data when fetching books, 
+        // resource rule: used async suffix to indicate asynchronous operation, making it clear for developers to use await when calling this method
 
            // GET: api/Books/5
         [HttpGet("{id}")]
@@ -76,7 +77,8 @@ public async Task<IActionResult> UpdateBookAsync(int id, BookCreateDto dto)
 // PATCH: api/Books/status/5
 // Used for partial updates (just changing the status)
 [HttpPatch("status/{id}")]
-public async Task<IActionResult> UpdateBookStatusAsync(int id, [FromBody] string newStatus)
+public async Task<IActionResult> UpdateBookStatusAsync(int id, [FromBody] string newStatus)//deserializes the incoming JSON payload into a LoginDto object, 
+                                                //if we didnt use this([from body]): even if the frontend sent the data perfectly, the C# code wouldn't know where to look for it
 {
     var book = await _context.Books.FindAsync(id);
     if (book == null) return NotFound();

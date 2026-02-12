@@ -31,7 +31,7 @@ public class CategoriesController : ControllerBase
     [HttpDelete("{id}")]
 public async Task<IActionResult> DeleteCategoryAsync(int id)
 {
-    var category = await _context.Categories.Include(c => c.Books).FirstOrDefaultAsync(c => c.Id == id);
+    var category = await _context.Categories.Include(c => c.Books).FirstOrDefaultAsync(c => c.Id == id);//eager loaded,Loads the User and their Role in one SQL query. It's fast and reliable for APIs.
     if (category == null) return NotFound();
 
     if (category.Books.Any()) {

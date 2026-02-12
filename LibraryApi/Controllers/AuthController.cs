@@ -7,7 +7,10 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+//the bussiness logic,handles user authentication, generates JWT tokens, and defines the API endpoints for login.
+//controllers use dtos to talk to front end and models to talk to database, 
 
+//authcontroller manages access
 namespace LibraryApi.Controllers
 {
     [Route("api/[controller]")]
@@ -24,7 +27,9 @@ namespace LibraryApi.Controllers
         }
 
        [HttpPost("login")]
-public async Task<IActionResult> LoginAsync([FromBody] LoginDto loginDto)
+public async Task<IActionResult> LoginAsync([FromBody] LoginDto loginDto)//deserializes the incoming JSON payload into a LoginDto object, 
+                                                //if we didnt use this([from body]): even if the frontend sent the data perfectly, the C# code wouldn't know where to look for it
+
 {
     // Standard: Basic validation check
             if (loginDto == null || string.IsNullOrEmpty(loginDto.Email) || string.IsNullOrEmpty(loginDto.Password))
