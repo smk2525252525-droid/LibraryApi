@@ -1,1 +1,5 @@
-<p>hello conflict<p>
+
+<p>hello conflict resolved with both hellos<p>
+
+<p>hello<p>
+ main

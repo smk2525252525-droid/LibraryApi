@@ -22,7 +22,7 @@ public class IssuingsController : ControllerBase
 public async Task<ActionResult<Issuing>> PostIssuing(IssuingDto dto)
 {
     // The compiler will no longer complain about 'User' and 'Book' 
-    // because we removed the 'required' keyword in the model.
+    // because: removed the 'required' keyword in the model.
     var issuing = new Issuing 
     { 
         UserId = dto.UserId, 
