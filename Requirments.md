@@ -1,68 +1,67 @@
-# Application Tracking System (ATS) - User Stories & Requirements
+# ATS System Requirements - Membership Tracking
 
-## Project: Library Membership Tracking
-**Baseline Story:** User Login (Authentication)
-**Baseline Estimate:** 2 Story Points (S)
+This document outlines the requirements for the Membership Application Tracking System (ATS). 
 
----
-
-## Feature: Membership Application Management
-
-### Story 1: Submit Membership Application
-**As a** Potential Member,  
-**I want to** fill out a digital membership application,  
-**So that** the librarian can review my request for access.
-
-*   **Estimation:** 3 Story Points (M)
-*   **Scenario:** Successful Submission of Application
-    *   **Given** I am on the "Apply for Membership" page
-    *   **When** I enter a unique email, full name, and student ID
-    *   **And** I click "Submit"
-    *   **Then** the system should create a record with "Pending" status
-    *   **And** the API should return a `201 Created` status code.
+## Estimation Baseline
+* Story: User Authentication (Login)
+* Baseline Points: 2
+* Reason: Standard implementation of BCrypt verification and JWT generation.
 
 ---
 
-### Story 2: Admin Review and Approval
-**As an** Admin,  
-**I want to** approve pending applications,  
-**So that** applicants are automatically granted "Member" access.
+## 1. Membership Application Submission
+**User Story:**
+As a Potential Member, I want to submit a registration application so that the Admin can verify my identity before I gain library access.
 
-*   **Estimation:** 5 Story Points (L)
-*   **Scenario:** Converting a Pending Application to a User
-    *   **Given** I am logged in with the "Admin" role
-    *   **When** I select a "Pending" application from the dashboard
-    *   **And** I click the "Approve" button
-    *   **Then** the application status should update to "Approved"
-    *   **And** a new entry should be created in the `Users` table with `RoleId = 2`.
+**Estimation:** 3 Points
 
----
-
-### Story 3: Track Application Status
-**As an** Applicant,  
-**I want to** check the current status of my request using my email,  
-**So that** I know when I am authorized to visit the library.
-
-*   **Estimation:** 2 Story Points (S)
-*   **Scenario:** Checking status of an "In-Review" application
-    *   **Given** I have a submission associated with my email
-    *   **When** I enter my email into the "Status Checker" field
-    *   **Then** the system should display the current status (e.g., "Pending", "Approved", or "Rejected")
-    *   **And** display the date the application was submitted.
+**Scenario: Valid application submission**
+Given I am on the membership registration page
+When I enter a unique email, name, and student ID
+And I click the submit button
+Then the database should create a new application record with status 'Pending'
+And the system should return a 201 Created response.
 
 ---
 
-### Story 4: Reject Application with Reason
-**As an** Admin,  
-**I want to** reject invalid applications and provide a reason,  
-**So that** applicants know why they were not approved.
+## 2. Admin Application Review
+**User Story:**
+As an Admin, I want to approve pending applications so that the system automatically generates a library user account.
 
-*   **Estimation:** 3 Story Points (M)
-*   **Scenario:** Rejecting for missing documentation
-    *   **Given** I am reviewing a pending application as an Admin
-    *   **When** I click the "Reject" button
-    *   **And** I enter the reason "Missing Student ID Photo"
-    *   **Then** the application status should change to "Rejected"
-    *   **And** the reason should be stored in the database for the applicant to view.
+**Estimation:** 5 Points
+
+**Scenario: Approving an applicant**
+Given I am logged in as an Admin
+When I access the 'Pending Applications' list
+And I click 'Approve' on a specific record
+Then the application status should update to 'Approved' 
+And a new row should be created in the Users table with the 'Member' RoleId.
+
+---
+
+## 3. Status Tracking
+**User Story:**
+As an Applicant, I want to check the status of my application using my email address so that I know when I am authorized to borrow books.
+
+**Estimation:** 2 Points
+
+**Scenario: Checking status of an active application**
+Given an application exists for my email address
+When I enter my email into the tracker
+Then the UI should display the current status and the date of submission.
+
+---
+
+## 4. Rejection Logic
+**User Story:**
+As an Admin, I want to reject incomplete applications with a specific reason so that the applicant knows why they were denied.
+
+**Estimation:** 3 Points
+
+**Scenario: Rejecting for invalid documentation**
+Given I am reviewing an application as an Admin
+When I click 'Reject' and enter 'Invalid ID format' as the reason
+Then the application status should change to 'Rejected'
+And the rejection reason must be saved to the database record.
 
 ---
