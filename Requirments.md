@@ -5,7 +5,7 @@ This document outlines the requirements for the Membership Application Tracking 
 ## Estimation Baseline
 * Story: User Authentication (Login)
 * Baseline Points: 2
-* Reason: Standard implementation of BCrypt verification and JWT generation.
+* Reason: Standard implementation of verification and JWT generation.
 
 ---
 
