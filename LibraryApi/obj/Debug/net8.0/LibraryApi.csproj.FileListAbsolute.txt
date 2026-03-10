@@ -8,7 +8,9 @@ C:\Users\hassakum\Downloads\Assignment4\LibraryApi\bin\Debug\net8.0\LibraryApi.d
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi\bin\Debug\net8.0\LibraryApi.pdb
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi\bin\Debug\net8.0\Azure.Identity.dll
+C:\Users\hassakum\Downloads\Assignment4\LibraryApi\bin\Debug\net8.0\BCrypt.Net-Next.dll
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi\bin\Debug\net8.0\Humanizer.dll
+C:\Users\hassakum\Downloads\Assignment4\LibraryApi\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
@@ -123,6 +125,7 @@ C:\Users\hassakum\Downloads\Assignment4\LibraryApi\obj\Debug\net8.0\LibraryApi.A
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi\obj\Debug\net8.0\LibraryApi.csproj.CoreCompileInputs.cache
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi\obj\Debug\net8.0\LibraryApi.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi\obj\Debug\net8.0\LibraryApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\hassakum\Downloads\Assignment4\LibraryApi\obj\Debug\net8.0\LibraryApi.sourcelink.json
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi\obj\Debug\net8.0\rjimswa.dswa.cache.json
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
@@ -137,6 +140,3 @@ C:\Users\hassakum\Downloads\Assignment4\LibraryApi\obj\Debug\net8.0\refint\Libra
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi\obj\Debug\net8.0\LibraryApi.pdb
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi\obj\Debug\net8.0\LibraryApi.genruntimeconfig.cache
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi\obj\Debug\net8.0\ref\LibraryApi.dll
-C:\Users\hassakum\Downloads\Assignment4\LibraryApi\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-C:\Users\hassakum\Downloads\Assignment4\LibraryApi\bin\Debug\net8.0\BCrypt.Net-Next.dll
-C:\Users\hassakum\Downloads\Assignment4\LibraryApi\obj\Debug\net8.0\LibraryApi.sourcelink.json

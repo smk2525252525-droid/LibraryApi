@@ -1,5 +1,4 @@
 using LibraryApi.Helpers;
-using NUnit.Framework;
 
 namespace LibraryApi.Tests
 {

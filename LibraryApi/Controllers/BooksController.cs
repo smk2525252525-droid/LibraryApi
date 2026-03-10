@@ -19,6 +19,8 @@ public class BooksController : ControllerBase
     public async Task<ActionResult<IEnumerable<Book>>> GetBooks() => 
         await _context.Books.Include(b => b.Category).ToListAsync();
 
+        
+
     [HttpPost]
     [Authorize(Roles = "Admin")]
 public async Task<ActionResult<Book>> PostBook(BookCreateDto dto)
