@@ -1,0 +1,40 @@
+input validation and sanitization:
+formatted response coming into API
+-DTOs, type parameters in controllers
+*avoid garbage data and hacker sql injections
+
+avoid hard coded credentials:
+-moved database connection string and jwt key here and put this file in .gitignore so it isn't uploaded to GitHub
+*if in program.cs it could be available for everyone to see on GitHub
+
+CORS( cross origin resource sharing):
+allows frontend to send request to backend/API through handshake between 'different' ports (browser and API)
+-builder.services.cors in program.cs
+*frontend would load html/css but every data request would be blocked eg. getbooks,login etc. by browser
+
+SQL Injection:
+an attacker injects malicious sql code in input field example login password
+-use ORM:object relational mapper=(entity framework core), so we use LINQ for sql commands and database treats all 
+input as data not code so injection wont work
+
+Multi Factor Authentication:
+more than one method of authentication eg. password + sms, password/pin + faceid
+-(not implemented in code)
+*prevent unauthoized access by adding another layer of authenticating 
+
+Secure API Access Jwt & oAuth:
+jwt allows user to prove who they are/role/etc
+has: header,payload(user id,role,etc.),signature from secret key
+-authcontroller.cs -> GenerateJwtBearer
+*security risk
+*performance drag as for every request server will need to check role from database
+
+Auditing:
+Who did what and when, kind of like keeping logs
+-issuing.cs where we record userid,bookid,issuedat and returned at
+-a catch block in program.cs logging database seeding errors
+
+Avoid Compromized libraries / code:
+avoiding libraris with known vulnerabilities: eg. bugs hackers can exploit
+-used official nuget.org packages in .csproj
+*hackers can attack, use any backdoors they have hidden
