@@ -154,3 +154,5 @@ C:\Users\hassakum\Downloads\Assignment4\LibraryApi.Tests\obj\Debug\net8.0\refint
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi.Tests\obj\Debug\net8.0\LibraryApi.Tests.pdb
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi.Tests\obj\Debug\net8.0\LibraryApi.Tests.genruntimeconfig.cache
 C:\Users\hassakum\Downloads\Assignment4\LibraryApi.Tests\obj\Debug\net8.0\ref\LibraryApi.Tests.dll
+C:\Users\hassakum\Downloads\Assignment4\LibraryApi.Tests\bin\Debug\net8.0\Castle.Core.dll
+C:\Users\hassakum\Downloads\Assignment4\LibraryApi.Tests\bin\Debug\net8.0\Moq.dll
