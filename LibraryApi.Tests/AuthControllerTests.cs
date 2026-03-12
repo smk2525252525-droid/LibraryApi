@@ -33,7 +33,7 @@ namespace LibraryApi.Tests
             var password = "password123";
             var user = new User { 
                 Email = "test@test.com", 
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(password), 
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(password), //gave bcrypt as password
                 Name = "Tester",
                 RoleId = 1
             };

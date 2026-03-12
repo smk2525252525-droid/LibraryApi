@@ -37,7 +37,7 @@ namespace LibraryApi.Controllers
 
         [AllowAnonymous] // Allow anyone to register
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(UserCreateDto userDto)
+        public async Task<ActionResult<User>> RegisterUser(UserCreateDto userDto)
         {
             // Map DTO to Entity
             var user = new User

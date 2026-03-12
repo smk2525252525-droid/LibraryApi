@@ -18,7 +18,7 @@ public class CategoriesController : ControllerBase
 
     [HttpPost]
     [Authorize(Roles = "Admin")]
-    public async Task<ActionResult<Category>> PostCategory(CategoryDto dto)
+    public async Task<ActionResult<Category>> CreateCategory(CategoryDto dto)
     {
         var category = new Category { Name = dto.Name };
         _context.Categories.Add(category);

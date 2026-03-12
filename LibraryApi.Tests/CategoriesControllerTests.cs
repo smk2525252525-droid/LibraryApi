@@ -36,12 +36,12 @@ namespace LibraryApi.Tests
             var result = await _controller.CreateCategory(categoryDto);
 
             // 3. ASSERT: 
-            // Check if the result is 'CreatedAtActionResult' (Status 201)
+            // Check if the result is a CreatedAtActionResult with the correct status code
             var createdResult = result.Result as CreatedAtActionResult;
             Assert.That(createdResult, Is.Not.Null);
             Assert.That(createdResult!.StatusCode, Is.EqualTo(201));
 
-            // Verify the data exists in our fake database
+            // Verify the data exists in inmemeory database
             var categoryInDb = await _context.Categories.FirstOrDefaultAsync(c => c.Name == "Technology");
             Assert.That(categoryInDb, Is.Not.Null);
             Assert.That(categoryInDb!.Name, Is.EqualTo("Technology"));
